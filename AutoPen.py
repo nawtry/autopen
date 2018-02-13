@@ -54,6 +54,7 @@ Builder.load_string("""
 				root.manager.transition.duration = .5
 				root.manager.current = 'tools'
 
+		
 		Button:
 			text: 'How-To'
 			size_hint: .25, .1
@@ -213,6 +214,15 @@ Builder.load_string("""
 				root.manager.transition.duration = .5
 				root.manager.current = 'can'
 		Button:
+			text: 'CARS'
+			size_hint: .25, .1
+			pos_hint: {'x':.4, 'y':.4}
+			on_press:
+				root.manager.transition.direction = 'left'
+				root.manager.transition.duration = .5
+				root.manager.current = 'cars'
+			
+		Button:
 			text: 'Bluetooth/Wi-fi'
 			size_hint: .25, .1
 			pos_hint: {'x':.7, 'y':.2}
@@ -272,6 +282,32 @@ Builder.load_string("""
 			source: "images/AutoPenBlack.png"
 			size_hint: 0.1,0.1
 			pos_hint: {'x':0, 'y':0.88}
+
+<CarsPage>:
+	id: cars_main
+	FloatLayout:
+		id: cars_float
+		canvas.before:
+			Rectangle:
+				source: 'images/background_front.jpg'
+				pos: self.pos
+				size: self.size
+		Label:
+			text: '[i][b][color=3388dd]Cars[/color][/b][/i]'
+			underline: True
+			markup: True
+			font_size: '40sp'
+			size_hint: .25, .1
+			pos_hint: {'x': .4, 'y': .8}
+
+		Button:
+			text: '2014 Ford Taurus'
+			size_hint: .25, .1
+			pos_hint: {'x':.4, 'y':.4}
+			on_press:
+				root.manager.transition.direction = 'left'
+				root.manager.transition.duration = .5
+				root.manager.current = '2014fordtaurus'
 
 <CanPage>:
 	id: can_main
@@ -1173,6 +1209,13 @@ class BluetoothWifiPage(Screen):
 			#widget.ids.scroll2.remove_widget(widget.ids.label2)
 	pass
 
+class CarsPage(Screen):
+	def sdr(widget, value):
+		v = value;
+		if v == '2014fordtaurus':
+			screen_manager.current = '2014fordtaurus'
+			#screen_manager.current_screen.
+		
 class SDRPage(Screen):
 
 	def sdr(widget, value):
@@ -1427,6 +1470,7 @@ screen_manager.add_widget(CanPage(name='can'))
 screen_manager.add_widget(SDRPage(name='sdr'))
 screen_manager.add_widget(MiscellaneousPage(name='miscellaneous'))
 screen_manager.add_widget(SeeAllPage(name='seeall'))
+screen_manager.add_widget(CarsPage(name='cars'))
 
 
 
